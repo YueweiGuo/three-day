@@ -15,7 +15,6 @@ scene.background = new THREE.Color(0xffffff);
 
 
 const geometry = new THREE.BoxGeometry(300, 300, 300) // 创建几何体
-
 const material = new THREE.MeshLambertMaterial({
   color: 0xff0000,
   transparent: true,
@@ -24,14 +23,13 @@ const material = new THREE.MeshLambertMaterial({
 
 // 30:视场角度, width / height:Canvas画布宽高比, 1:近裁截面, 3000：远裁截面
 const camera = new THREE.PerspectiveCamera(50, width / height, 600, 2800) // 实例化一个透视投影相机对象
-camera.position.set(1200, 200, 200) // 相机位置
+camera.position.set(700, 700, 700) // 相机位置
 camera.lookAt(0,0,0) // 相机观察目标
-
 
 const mesh = new THREE.Mesh(geometry, material) // 几何体，材质 | 网格模型对象
 mesh.position.set(150,150,1000) // 模型位置
 mesh.castShadow = true; // 物体投射影子
-mesh.receiveShadow = true
+mesh.receiveShadow = true 
 scene.add(mesh) // 模型添加到场景中
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); // 环境光
@@ -40,8 +38,8 @@ scene.add(ambientLight);
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5); // 平行光
 directionalLight.position.set(700, 700, 700);
 directionalLight.castShadow = true; // 启用影子
-directionalLight.shadow.mapSize.width = 100; // 影子纹理宽度
-directionalLight.shadow.mapSize.height = 100; // 影子纹理高度
+directionalLight.shadow.mapSize.width = 600; // 影子纹理宽度
+directionalLight.shadow.mapSize.height = 600; // 影子纹理高度
 directionalLight.shadow.camera.left = -1600;
 directionalLight.shadow.camera.right = 800;
 directionalLight.shadow.camera.top = 800;
@@ -71,7 +69,7 @@ const floorMaterial = new THREE.ShadowMaterial({
     metalness: 0.5, // 金属感，0 为非金属，1 为金属
     clearcoat: 1, // 清漆层，0 为无清漆，1 为完全清漆
     clearcoatRoughness: 0.1, // 清漆粗糙度，
-    opacity: 0
+    opacity: 0.5
 }); // 设置为白色
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = -Math.PI / 2; // 使地板水平
@@ -87,17 +85,11 @@ gridHelper.material = lineMaterial;
 scene.add(gridHelper);
 
 
-
-
-
 const readerer = new THREE.WebGLRenderer() // 创建渲染器对象
 readerer.shadowMap.enabled = true
 readerer.shadowMap.type = THREE.PCFSoftShadowMap;
-
 readerer.setSize(width, height) // 设置canvas画布尺寸
-readerer.shadowMap.enabled = true;
 document.getElementById('app').appendChild(readerer.domElement)
-
 
 const loader = new GLTFLoader();
 loader.load('/public/无标题.glb', function (gltf) {
@@ -107,7 +99,6 @@ loader.load('/public/无标题.glb', function (gltf) {
     model.traverse((child) => {
         if (child.isMesh) {
             child.castShadow = true; // 模型投射影子
-            child.receiveShadow = true; // 如果需要，模型也可以接收影子
         }
     });
     scene.add(model);
@@ -115,10 +106,6 @@ loader.load('/public/无标题.glb', function (gltf) {
 }, undefined, function (error) {
     console.error(error);
 });
-
-
-
-
 
 
 
@@ -150,16 +137,4 @@ animate()
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>
