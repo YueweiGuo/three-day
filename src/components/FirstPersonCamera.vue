@@ -235,7 +235,6 @@ const animate = () => {
     handleMovement();
     updateCameraRotation()
     // controls.update(); // 更新控制器
-    renderer.render(scene, camera); // 渲染场景
 }
 animate();
 </script>

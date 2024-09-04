@@ -1,7 +1,4 @@
 <script setup name="Play">
-  import { ref, defineOptions } from 'vue'
-
-  
   // 引入three.js
   import * as THREE from 'three';
   // 引入扩展库OrbitControls.js

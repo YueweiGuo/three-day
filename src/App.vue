@@ -1,10 +1,11 @@
 <script setup>
 import Play from '@/components/Play.vue'
 import FirstPersonCamera from '@/components/FirstPersonCamera.vue'
+import Ready from '@/components/Ready.vue'
 </script>
 
 <template>
-    <FirstPersonCamera></FirstPersonCamera>
+    <Ready />
 </template>
 
 <style scoped>
